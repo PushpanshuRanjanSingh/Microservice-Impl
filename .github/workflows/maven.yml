@@ -19,15 +19,17 @@ jobs:
           java-version: '8.0.382+5'
           distribution: 'temurin'
           cache: maven
-      - name: Go to project directory
-        run: cd Microservice-Impl/discovery-eureka-server
-      - name: Build with Maven
-        run: mvn clean install
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: maven-artifacts
-          path: Microservice-Impl/*/target/*.jar
+      - name: List directory
+        run: ls -la
+#      - name: Go to project directory
+#        run: cd Microservice-Impl/discovery-eureka-server
+#      - name: Build with Maven
+#        run: mvn clean install
+#      - name: Upload artifacts
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: maven-artifacts
+#          path: Microservice-Impl/*/target/*.jar
 
 
       - name: Update dependency graph
