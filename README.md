@@ -45,3 +45,26 @@ How Does it work ?
 7. Vallah Done, Properties updated with restart and redeployment
 
 ![config-server.png](asset%2Fconfig-server.png)
+
+**Microservice Security: Encryption and Decryption for properties data**
+To encrypt and decrypt properties data we can use Spring Cloud Config Server's encryption feature. Here are the steps:
+
+There are two-way to implement Encryption and Decryption 
+1. Symmetric Encryption/Decryption [Secret Key defines in bootstrap.properties]
+2. Asymmetric Encryption/Decryption [Keystore generated through keytool and define in bootstrap.properties]
+
+You need to add `{cipher}+encrypted key` like `{cipher}hg3472gsyf7t8f374tgwbddyi` in properties file.
+When config server reads this value, it will decrypt it using the secret key/keystore defined in bootstrap.properties and return plain text value.
+Similarly, you can encrypt values in code and store encrypted string in properties file. Config server will decrypt it automatically.
+
+To test, you can use POST API by sending encrypted value and decrypted value.
+http://127.0.0.1:8888/encrypt
+![encrypt.png](asset%2Fencrypt.png)
+http://127.0.0.1:8888/decrypt
+![decrypt.png](asset%2Fdecrypt.png)
+
+_**Implementation in code**_
+![implementation.png](asset%2Fimplementation.png)
+![user.png](asset%2Fuser.png)
+
+    

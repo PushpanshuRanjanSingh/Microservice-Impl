@@ -4,6 +4,9 @@ import io.javabrains.moviecatalogservice.models.CatalogItem;
 import io.javabrains.moviecatalogservice.models.UserRating;
 import io.javabrains.moviecatalogservice.service.MovieInfo;
 import io.javabrains.moviecatalogservice.service.UserRatingInfo;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,9 +18,12 @@ import java.util.stream.Collectors;
 @RequestMapping("/catalog")
 public class CatalogResource {
 
-//    WebClient.Builder webClientBuilder;
+    //    WebClient.Builder webClientBuilder;
     private final MovieInfo movieInfo;
     private final UserRatingInfo userRatingInfo;
+
+    @Value("${temp.username}")
+    String username;
 
     public CatalogResource(MovieInfo movieInfo, UserRatingInfo userRatingInfo) {
         this.movieInfo = movieInfo;
@@ -33,6 +39,11 @@ public class CatalogResource {
         return userRating.getRatings().stream()
                 .map(movieInfo::getCatalogItem)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<String> getUserFromProperty() {
+        return ResponseEntity.ok(username);
     }
 }
 
