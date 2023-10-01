@@ -40,9 +40,9 @@ How Does it work ?
 2. Properties file should have same name as microservice name with ext that will work as private entity accessed by particular instance else it will be treated as public.
 3. Cloud Config Server always look for git changes
 4. Bean should be annotated with RefreshScope annotation 
-5. Note: Actuator provides manny types of hook with endpoint, in which we need to include that endpoint in application properties of that microservice project
+5. Note: Actuator provides many types of hook with endpoint, in which we need to include that endpoint in application properties of that microservice project
 6. After the git changes, we need to call a post method api call to the instance of that particular microservice such as : http://localhost:8081/actuator/refresh
-7. Vallah Done, Properties updated with restart and redeployment
+7. Vallah Done, Properties updated without restart and redeployment
 
 ![config-server.png](asset%2Fconfig-server.png)
 
