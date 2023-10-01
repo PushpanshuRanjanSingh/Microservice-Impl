@@ -20,13 +20,8 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
-        run: cd Microservice-Impl
-          for project in discovery-eureka-server spring-cloud-config-server movie-catalog-service movie-info-service ratings-data-service
-          do
-           cd $project
-           mvn clean install
-           cd ..
-          done
+        run: cd Microservice-Impl/discovery-eureka-server
+             mvn clean install
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
