@@ -2,9 +2,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "cdci" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "cdci" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -19,17 +19,19 @@ jobs:
           java-version: '8.0.382+5'
           distribution: 'temurin'
           cache: maven
-      - name: List directory
-        run: ls -la
-#      - name: Go to project directory
-#        run: cd Microservice-Impl/discovery-eureka-server
-#      - name: Build with Maven
-#        run: mvn clean install
-#      - name: Upload artifacts
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: maven-artifacts
-#          path: Microservice-Impl/*/target/*.jar
+      - name: Build with Maven
+        run:
+          for project in discovery-eureka-server spring-cloud-config-server movie-catalog-service movie-info-service ratings-data-service
+          do
+           cd $project
+           mvn clean install
+           cd ..
+          done
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: maven-artifacts
+          path: Microservice-Impl/*/target/*.jar
 
 
       - name: Update dependency graph
